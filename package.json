@@ -1,0 +1,24 @@
+{
+  "name": "photos_api",
+  "version": "1.0.0",
+  "description": "API for User Photos",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jblancoh/photos_api.git"
+  },
+  "author": "Jonathan Blanco",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jblancoh/photos_api/issues"
+  },
+  "homepage": "https://github.com/jblancoh/photos_api#readme",
+  "dependencies": {
+    "mongoose": "^4.7.6",
+    "restify": "^4.3.0",
+    "restify-validator": "^0.3.1"
+  }
+}
