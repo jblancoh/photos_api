@@ -5,6 +5,7 @@ var server = restify.createServer()
 var setupController = require('./controllers/setupController')
 var userController = require('./controllers/userController')
 var commentController = require('./controllers/commentController')
+var photoController = require('./controllers/photoController')
 var restifyValidator = require('restify-validator')
 var mongoose = require('mongoose');
 var config = require('./config/dbConnection')
@@ -13,6 +14,7 @@ var config = require('./config/dbConnection')
 setupController(server, restify, restifyValidator)
 userController(server)
 commentController(server)
+photoController(server)
 
 mongoose.connect(config.getMongoConnection(), function(err,res){
   if(err){
