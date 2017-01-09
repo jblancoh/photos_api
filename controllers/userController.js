@@ -1,13 +1,16 @@
 var helpers = require('../config/helperFunctions')
 var UserModel = require('../models/userModel')
 var CommentModel = require('../models/commentModel')
+var Photo = require('../models/photoModel')
 
 module.exports = function(server) {
 
   server.get('/users', (req, res, next) => {
     UserModel.find({}, function(err, users){
-      helpers.success(res, next, users)
-      return next()
+      Photo.populate(users, {path: "photo"}, function(err, users){
+        helpers.success(res, next, users)
+        return next()
+      })
     })
   })
 
@@ -20,12 +23,14 @@ module.exports = function(server) {
       return next()
     }
     UserModel.findOne({ _id: req.params.id}, function (err, user) {
+      Photo.populate(user, {path: "photo"}, function(err, user){
         if (user === null){
           helpers.failure(res, next, 'El usuario especificado no puede ser encontado', 404)
           return next()
         }
         helpers.success(res, next, user)
         return next()
+      })
     })
   })
 
