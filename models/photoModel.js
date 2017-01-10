@@ -9,10 +9,7 @@ var PhotoSchema = new Schema({
   title     : String,
   url       : String,
   likes     : Number,
-  user      : {
-    type: ObjectId,
-    ref: "user"
-  },
+  user      : String,
   tag_user  :[{
     type: ObjectId,
     ref : "user"

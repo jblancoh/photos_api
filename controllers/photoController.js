@@ -15,6 +15,13 @@ module.exports = function(server) {
       })
     })
   })
+  server.get('/photos/user/:id', (req, res, next) => {
+    PhotoModel.find({user: req.params.id }, function(err, photos)
+    {
+        helpers.success(res, next, photos)
+        return next()
+    })
+  })
   server.get('/photo/:id', (req, res, next) =>{
     req.assert('id', 'Id es necesario').notEmpty()
     var errors = req.validationErrors()
