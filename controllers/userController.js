@@ -13,7 +13,25 @@ module.exports = function(server) {
       })
     })
   })
-
+  server.get('/user/login', (req, res, next) => {
+    var errors = req.validationErrors()
+    if (errors){
+      helpers.failure(res, next, errors[0], 400)
+      return next()
+    }
+    UserModel.find({email: req.params.email}, function(err, users){
+      if (users.length == 0){
+        helpers.failure(res, next, 'El usuario especificado no puede ser encontado', 404)
+        return next()
+      }
+        if (req.params.password === users[0].password) {
+          helpers.success(res, next, users)
+          return next()
+        }
+        helpers.failure(res, next, 'La contraseña es incorrecta', 404)
+        return next()
+    })
+  })
 
   server.get('/user/:id', (req, res, next) => {
     req.assert('id', 'Id es necesario').notEmpty()
